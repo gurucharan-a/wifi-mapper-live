@@ -41,7 +41,10 @@ export function ReportGenerator() {
             variant="outline"
             className="h-9 gap-2"
             onClick={() => {
-              if (!canvasRef.current) return toast.error("Heatmap not ready");
+              if (!canvasRef.current) {
+                toast.error("Heatmap not ready");
+                return;
+              }
               exportCanvasPng(canvasRef.current, projectName);
             }}
           >
