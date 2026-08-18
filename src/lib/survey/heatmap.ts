@@ -143,17 +143,21 @@ export function renderHeatmap(canvas: HTMLCanvasElement, opts: HeatmapOptions) {
     .filter((s): s is { x: number; y: number; v: number } => s.v != null);
   if (samples.length === 0) return;
 
-  const res = opts.resolution ?? 110;
+  const res = opts.resolution ?? 150;
   const cols = res;
   const rows = Math.max(8, Math.round((res * h) / Math.max(1, w)));
-  const cellW = w / cols;
-  const cellH = h / rows;
-  const power = opts.power ?? 2.4;
-  const radius = opts.radius ?? 0.26;
+  const power = opts.power ?? 3;
+  const radius = opts.radius ?? 0.16;
   const scale = layerScale(opts.layer);
   const isChannel = opts.layer === "channel";
 
-  ctx.globalAlpha = opts.opacity;
+  const grid = document.createElement("canvas");
+  grid.width = cols;
+  grid.height = rows;
+  const gctx = grid.getContext("2d");
+  if (!gctx) return;
+  const img = gctx.createImageData(cols, rows);
+
   for (let r = 0; r < rows; r++) {
     for (let c = 0; c < cols; c++) {
       const nx = (c + 0.5) / cols;
@@ -173,7 +177,11 @@ export function renderHeatmap(canvas: HTMLCanvasElement, opts: HeatmapOptions) {
         wsum += wgt;
         vsum += wgt * s.v;
       }
-      if (wsum === 0) continue;
+      const idx = (r * cols + c) * 4;
+      if (wsum === 0) {
+        img.data[idx + 3] = 0;
+        continue;
+      }
       const value = isChannel ? nearestV : vsum / wsum;
       let rgb: RGB;
       if (isChannel) {
@@ -183,13 +191,22 @@ export function renderHeatmap(canvas: HTMLCanvasElement, opts: HeatmapOptions) {
         if (!scale.higherIsBetter) t = 1 - t;
         rgb = rampColor(t);
       }
-      const fade = Math.max(0, Math.min(1, 1 - (nearest - radius * 0.55) / (radius * 0.45)));
-      ctx.globalAlpha = opts.opacity * (0.35 + 0.65 * fade);
-      ctx.fillStyle = `rgb(${rgb[0]},${rgb[1]},${rgb[2]})`;
-      ctx.fillRect(c * cellW - 0.5, r * cellH - 0.5, cellW + 1, cellH + 1);
+      // fade out towards the edge of the measured area
+      const fade = Math.max(0, Math.min(1, 1 - (nearest - radius * 0.5) / (radius * 0.5)));
+      img.data[idx] = rgb[0];
+      img.data[idx + 1] = rgb[1];
+      img.data[idx + 2] = rgb[2];
+      img.data[idx + 3] = Math.round(255 * Math.pow(fade, 0.85));
     }
   }
-  ctx.globalAlpha = 1;
+  gctx.putImageData(img, 0, 0);
+
+  ctx.save();
+  ctx.globalAlpha = opts.opacity;
+  ctx.imageSmoothingEnabled = true;
+  ctx.imageSmoothingQuality = "high";
+  ctx.drawImage(grid, 0, 0, w, h);
+  ctx.restore();
 }
 
 export function formatLayerValue(layer: HeatmapLayer, v: number | null) {

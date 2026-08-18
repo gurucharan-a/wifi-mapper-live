@@ -257,7 +257,7 @@ export function FloorPlanViewer({
             <div className="absolute inset-0" style={{ backgroundImage: gridBg, backgroundSize: "40px 40px" }} />
           )}
 
-          <canvas ref={localCanvasRef} className="pointer-events-none absolute inset-0 h-full w-full mix-blend-screen" />
+          <canvas ref={localCanvasRef} className="pointer-events-none absolute inset-0 h-full w-full" />
 
           <svg className="pointer-events-none absolute inset-0 h-full w-full" viewBox="0 0 1 1" preserveAspectRatio="none">
             {obstacles.map((o) => (
