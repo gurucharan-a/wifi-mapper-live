@@ -10,33 +10,154 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AccessPointsRouteImport } from './routes/access-points'
+import { Route as AnalyticsRouteImport } from './routes/analytics'
+import { Route as HeatmapRouteImport } from './routes/heatmap'
+import { Route as NetworksRouteImport } from './routes/networks'
+import { Route as ProjectsRouteImport } from './routes/projects'
+import { Route as ReportsRouteImport } from './routes/reports'
+import { Route as ScannerRouteImport } from './routes/scanner'
+import { Route as SurveyRouteImport } from './routes/survey'
+import { Route as TroubleshootRouteImport } from './routes/troubleshoot'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AccessPointsRoute = AccessPointsRouteImport.update({
+  id: '/access-points',
+  path: '/access-points',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AnalyticsRoute = AnalyticsRouteImport.update({
+  id: '/analytics',
+  path: '/analytics',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HeatmapRoute = HeatmapRouteImport.update({
+  id: '/heatmap',
+  path: '/heatmap',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NetworksRoute = NetworksRouteImport.update({
+  id: '/networks',
+  path: '/networks',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProjectsRoute = ProjectsRouteImport.update({
+  id: '/projects',
+  path: '/projects',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReportsRoute = ReportsRouteImport.update({
+  id: '/reports',
+  path: '/reports',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ScannerRoute = ScannerRouteImport.update({
+  id: '/scanner',
+  path: '/scanner',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SurveyRoute = SurveyRouteImport.update({
+  id: '/survey',
+  path: '/survey',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TroubleshootRoute = TroubleshootRouteImport.update({
+  id: '/troubleshoot',
+  path: '/troubleshoot',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/access-points': typeof AccessPointsRoute
+  '/analytics': typeof AnalyticsRoute
+  '/heatmap': typeof HeatmapRoute
+  '/networks': typeof NetworksRoute
+  '/projects': typeof ProjectsRoute
+  '/reports': typeof ReportsRoute
+  '/scanner': typeof ScannerRoute
+  '/survey': typeof SurveyRoute
+  '/troubleshoot': typeof TroubleshootRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/access-points': typeof AccessPointsRoute
+  '/analytics': typeof AnalyticsRoute
+  '/heatmap': typeof HeatmapRoute
+  '/networks': typeof NetworksRoute
+  '/projects': typeof ProjectsRoute
+  '/reports': typeof ReportsRoute
+  '/scanner': typeof ScannerRoute
+  '/survey': typeof SurveyRoute
+  '/troubleshoot': typeof TroubleshootRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/access-points': typeof AccessPointsRoute
+  '/analytics': typeof AnalyticsRoute
+  '/heatmap': typeof HeatmapRoute
+  '/networks': typeof NetworksRoute
+  '/projects': typeof ProjectsRoute
+  '/reports': typeof ReportsRoute
+  '/scanner': typeof ScannerRoute
+  '/survey': typeof SurveyRoute
+  '/troubleshoot': typeof TroubleshootRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/access-points'
+    | '/analytics'
+    | '/heatmap'
+    | '/networks'
+    | '/projects'
+    | '/reports'
+    | '/scanner'
+    | '/survey'
+    | '/troubleshoot'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/access-points'
+    | '/analytics'
+    | '/heatmap'
+    | '/networks'
+    | '/projects'
+    | '/reports'
+    | '/scanner'
+    | '/survey'
+    | '/troubleshoot'
+  id:
+    | '__root__'
+    | '/'
+    | '/access-points'
+    | '/analytics'
+    | '/heatmap'
+    | '/networks'
+    | '/projects'
+    | '/reports'
+    | '/scanner'
+    | '/survey'
+    | '/troubleshoot'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AccessPointsRoute: typeof AccessPointsRoute
+  AnalyticsRoute: typeof AnalyticsRoute
+  HeatmapRoute: typeof HeatmapRoute
+  NetworksRoute: typeof NetworksRoute
+  ProjectsRoute: typeof ProjectsRoute
+  ReportsRoute: typeof ReportsRoute
+  ScannerRoute: typeof ScannerRoute
+  SurveyRoute: typeof SurveyRoute
+  TroubleshootRoute: typeof TroubleshootRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +169,83 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/access-points': {
+      id: '/access-points'
+      path: '/access-points'
+      fullPath: '/access-points'
+      preLoaderRoute: typeof AccessPointsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/analytics': {
+      id: '/analytics'
+      path: '/analytics'
+      fullPath: '/analytics'
+      preLoaderRoute: typeof AnalyticsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/heatmap': {
+      id: '/heatmap'
+      path: '/heatmap'
+      fullPath: '/heatmap'
+      preLoaderRoute: typeof HeatmapRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/networks': {
+      id: '/networks'
+      path: '/networks'
+      fullPath: '/networks'
+      preLoaderRoute: typeof NetworksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/projects': {
+      id: '/projects'
+      path: '/projects'
+      fullPath: '/projects'
+      preLoaderRoute: typeof ProjectsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reports': {
+      id: '/reports'
+      path: '/reports'
+      fullPath: '/reports'
+      preLoaderRoute: typeof ReportsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/scanner': {
+      id: '/scanner'
+      path: '/scanner'
+      fullPath: '/scanner'
+      preLoaderRoute: typeof ScannerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/survey': {
+      id: '/survey'
+      path: '/survey'
+      fullPath: '/survey'
+      preLoaderRoute: typeof SurveyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/troubleshoot': {
+      id: '/troubleshoot'
+      path: '/troubleshoot'
+      fullPath: '/troubleshoot'
+      preLoaderRoute: typeof TroubleshootRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AccessPointsRoute: AccessPointsRoute,
+  AnalyticsRoute: AnalyticsRoute,
+  HeatmapRoute: HeatmapRoute,
+  NetworksRoute: NetworksRoute,
+  ProjectsRoute: ProjectsRoute,
+  ReportsRoute: ReportsRoute,
+  ScannerRoute: ScannerRoute,
+  SurveyRoute: SurveyRoute,
+  TroubleshootRoute: TroubleshootRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
