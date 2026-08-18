@@ -9,20 +9,20 @@ export interface WifiSample {
   bssid: string | null;
   rssi: number | null;
   snr: number | null;
-  noise?: number | null;
+  noise?: number | null | undefined;
   channel: number | null;
   frequency: number | null;
   band: string | null;
   link_rate: number | null;
   tx_rate: number | null;
   rx_rate: number | null;
-  ping_ms?: number | null;
-  download_mbps?: number | null;
-  upload_mbps?: number | null;
-  packet_loss?: number | null;
-  security?: string | null;
+  ping_ms?: number | null | undefined;
+  download_mbps?: number | null | undefined;
+  upload_mbps?: number | null | undefined;
+  packet_loss?: number | null | undefined;
+  security?: string | null | undefined;
   /** true only when produced by the demo simulator */
-  simulated?: boolean;
+  simulated?: boolean | undefined;
 }
 
 export interface MeasurementPoint extends WifiSample {
@@ -41,7 +41,7 @@ export interface NetworkEntry {
   frequency: number;
   band: string;
   security: string;
-  simulated?: boolean;
+  simulated?: boolean | undefined;
 }
 
 export interface AccessPoint {
@@ -55,9 +55,9 @@ export interface AccessPoint {
   firstSeen: string;
   lastSeen: string;
   /** normalized floor-plan position, if placed by the user */
-  x?: number;
-  y?: number;
-  simulated?: boolean;
+  x?: number | undefined;
+  y?: number | undefined;
+  simulated?: boolean | undefined;
 }
 
 export interface FloorPlan {
